@@ -1,0 +1,5 @@
+node {
+    stage("pre-flight"){
+        echo "test"
+    }
+}
