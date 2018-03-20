@@ -1,5 +1,11 @@
-node {
+node{
     stage("pre-flight"){
-        echo "test"
+        git branch: 'development', url: 'https://github.com/robnester-rh/hdsl_test'
+    }
+    stage("Parse Configuration"){
+        parseConfigYaml()
+    }
+    stage("Deploy Infra"){
+        deployInfra()
     }
 }
