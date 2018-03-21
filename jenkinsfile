@@ -1,5 +1,6 @@
 node{
     stage("pre-flight"){
+        deleteDir()
         git branch: 'development', url: 'https://github.com/robnester-rh/hdsl_test'
     }
     stage("Parse Configuration"){
@@ -10,7 +11,7 @@ node{
     }
     stage("Test Pinfile"){
         sh "pwd"
-        sh "ls -lah"
-        sh "cat PinFile"
+        sh "ls -lah *"
+        sh "cat linchpin/PinFile"
     }
 }
