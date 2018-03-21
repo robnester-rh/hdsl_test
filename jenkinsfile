@@ -1,4 +1,4 @@
-node{
+node(){
     stage("pre-flight"){
         deleteDir()
         git branch: 'development', url: 'https://github.com/robnester-rh/hdsl_test'
