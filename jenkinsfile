@@ -8,4 +8,9 @@ node{
     stage("Deploy Infra"){
         deployInfra()
     }
+    stage("Test Pinfile"){
+        sh "pwd"
+        sh "ls -lah"
+        sh "cat PinFile"
+    }
 }
