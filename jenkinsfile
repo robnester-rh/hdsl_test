@@ -1,6 +1,6 @@
 node(){
     stage("pre-flight"){
-        deleteDir()
+        deleteDir('linchpin')
         git branch: 'development', url: 'https://github.com/robnester-rh/hdsl_test'
     }
     stage("Parse Configuration"){
