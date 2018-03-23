@@ -34,12 +34,12 @@ infra:
           distro: RHEL-7.4
           variant: Server
           hostrequires:
-            - processor:
-                op: ">="
-                value: 4
-            - device:
-                op: "="
-                type: network
+            - tag: processor
+              op: ">="
+              value: 4
+            - tag: device
+              op: "="
+              type: network
           job_group: central-ci-ops
 
           instances:
