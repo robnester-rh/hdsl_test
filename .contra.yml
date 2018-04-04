@@ -1,8 +1,6 @@
 ---
 infra:
     provision:
-
-
       cloud:
         aws:
           ami: ami-92340
@@ -10,17 +8,10 @@ infra:
           security_groups:
           - default
           instance_type: m1-large
-#          instance_tags:
-#            name: sleepy
-#            squiggle: bar
           instances:
           - name: db_server
-#            instance_tags:
-#              weather: nice
             region: us-east-2
           - name: host19
-#            instance_tags:
-#              weather: bad
           - name: host2
             security_groups:
             - special_squirrel
