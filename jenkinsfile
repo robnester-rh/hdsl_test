@@ -37,15 +37,15 @@ node(){
     stage("Parse Configuration"){
         parseConfigYaml()
     }
-    stage("Deploy Infra"){
-        deployInfra()
-    }
-    stage("Test Pinfile"){
-        sh "pwd"
-        sh "ls -lah *"
-        a = readFile 'linchpin/PinFile'
-        echo "PinFile Content:\n${a}"
-    }
-    archiveArtifacts '*, linchpin/*'
+    // stage("Deploy Infra"){
+    //     deployInfra()
+    // }
+    // stage("Test Pinfile"){
+    //     sh "pwd"
+    //     sh "ls -lah *"
+    //     a = readFile 'linchpin/PinFile'
+    //     echo "PinFile Content:\n${a}"
+    // }
+    // archiveArtifacts '*, linchpin/*'
 
 }
