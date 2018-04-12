@@ -2,6 +2,7 @@ node(){
     stage("pre-flight"){
         deleteDir()
         git branch: 'development', url: 'https://github.com/robnester-rh/hdsl_test'
+        env.buildParameters = [:]
     }
     stage("set build configurations"){
         addBuildParameters(
@@ -25,7 +26,10 @@ node(){
                 autoRebuild: false,
                 rebuildDisabled: false
             ],
-        )
+      )
+
+      setBuildParameters()
+
     }
 
     stage("Parse Configuration"){
