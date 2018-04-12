@@ -15,18 +15,20 @@ node(){
         )
         addBuildConfigurations(
             [
-                $class: 'BuildConfigProjectProperty',
-                name: '',
-                namespace: '',
-                resourceVersion: '',
-                uid: ''
-            ],
-            gitLabConnection('gitlab-tlv'),
-            [
-                $class: 'RebuildSettings',
-                autoRebuild: false,
-                rebuildDisabled: false
-            ],
+                [
+                    $class: 'BuildConfigProjectProperty',
+                    name: '',
+                    namespace: '',
+                    resourceVersion: '',
+                    uid: ''
+                ],
+                gitLabConnection('gitlab-tlv'),
+                [
+                    $class: 'RebuildSettings',
+                    autoRebuild: false,
+                    rebuildDisabled: false
+                ],
+            ]
       )
 
       setBuildParameters()
