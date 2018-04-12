@@ -12,7 +12,7 @@ node(){
 
             ]
         )
-        addBuildConfiguration(
+        addBuildConfigurations(
             [
                 $class: 'BuildConfigProjectProperty',
                 name: '',
