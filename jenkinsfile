@@ -3,6 +3,31 @@ node(){
         deleteDir()
         git branch: 'development', url: 'https://github.com/robnester-rh/hdsl_test'
     }
+    stage("set build configurations"){
+        addBuildParameters(
+            [
+                string(defaultValue: 'flotsam', description: 'One part of a shipwreck', name: 'FLOTSAM'),
+                string(defaultValue: 'jetsam', description: 'Another part of a shipwreck', name: 'JETSAM'),
+
+            ]
+        )
+        addBuildConfiguration(
+            [
+                $class: 'BuildConfigProjectProperty',
+                name: '',
+                namespace: '',
+                resourceVersion: '',
+                uid: ''
+            ],
+            gitLabConnection('gitlab-tlv'),
+            [
+                $class: 'RebuildSettings',
+                autoRebuild: false,
+                rebuildDisabled: false
+            ],
+        )
+    }
+
     stage("Parse Configuration"){
         parseConfigYaml()
     }
