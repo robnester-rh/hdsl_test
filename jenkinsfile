@@ -1,19 +1,27 @@
 addBuildConfigurations(
-    [
-        [
-            $class: 'BuildConfigProjectProperty',
-            name: '',
-            namespace: '',
-            resourceVersion: '',
-            uid: ''
-        ],
-        gitLabConnection('gitlab-tlv'),
-        [
-            $class: 'RebuildSettings',
-            autoRebuild: false,
-            rebuildDisabled: false
-        ],
-    ]
+  [
+          [
+                  $class: 'BuildConfigProjectProperty',
+                  name: '',
+                  namespace: '',
+                  resourceVersion: '',
+                  uid: ''
+          ],
+          buildDiscarder(
+                  logRotator(
+                          artifactDaysToKeepStr: '',
+                          artifactNumToKeepStr: '',
+                          daysToKeepStr: '1',
+                          numToKeepStr: ''
+                  )
+          ),
+          gitLabConnection('gitlab-tlv'),
+          [
+                  $class: 'RebuildSettings',
+                  autoRebuild: false,
+                  rebuildDisabled: false
+          ]
+  ]
 )
 
 addBuildParameters(
