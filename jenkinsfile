@@ -1,37 +1,34 @@
+addBuildParameters(
+    [
+        string(defaultValue: 'flotsam', description: 'One part of a shipwreck', name: 'FLOTSAM'),
+        string(defaultValue: 'jetsam', description: 'Another part of a shipwreck', name: 'JETSAM'),
+
+    ]
+)
+addBuildConfigurations(
+    [
+        [
+            $class: 'BuildConfigProjectProperty',
+            name: '',
+            namespace: '',
+            resourceVersion: '',
+            uid: ''
+        ],
+        gitLabConnection('gitlab-tlv'),
+        [
+            $class: 'RebuildSettings',
+            autoRebuild: false,
+            rebuildDisabled: false
+        ],
+    ]
+)
+
 node(){
     stage("pre-flight"){
         deleteDir()
         git branch: 'development', url: 'https://github.com/robnester-rh/hdsl_test'
         env.buildParameters = [:]
         env.buildConfigurations = []
-    }
-    stage("set build configurations"){
-        addBuildParameters(
-            [
-                string(defaultValue: 'flotsam', description: 'One part of a shipwreck', name: 'FLOTSAM'),
-                string(defaultValue: 'jetsam', description: 'Another part of a shipwreck', name: 'JETSAM'),
-
-            ]
-        )
-        addBuildConfigurations(
-            [
-                [
-                    $class: 'BuildConfigProjectProperty',
-                    name: '',
-                    namespace: '',
-                    resourceVersion: '',
-                    uid: ''
-                ],
-                gitLabConnection('gitlab-tlv'),
-                [
-                    $class: 'RebuildSettings',
-                    autoRebuild: false,
-                    rebuildDisabled: false
-                ],
-            ]
-      )
-
-
     }
 
     stage("Parse Configuration"){
