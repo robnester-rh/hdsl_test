@@ -5,23 +5,23 @@ addBuildParameters(
 
     ]
 )
-// addBuildConfigurations(
-//     [
-//         [
-//             $class: 'BuildConfigProjectProperty',
-//             name: '',
-//             namespace: '',
-//             resourceVersion: '',
-//             uid: ''
-//         ],
-//         gitLabConnection('gitlab-tlv'),
-//         [
-//             $class: 'RebuildSettings',
-//             autoRebuild: false,
-//             rebuildDisabled: false
-//         ],
-//     ]
-// )
+addBuildConfigurations(
+    [
+        [
+            $class: 'BuildConfigProjectProperty',
+            name: '',
+            namespace: '',
+            resourceVersion: '',
+            uid: ''
+        ],
+        gitLabConnection('gitlab-tlv'),
+        [
+            $class: 'RebuildSettings',
+            autoRebuild: false,
+            rebuildDisabled: false
+        ],
+    ]
+)
 
 node(){
     stage("pre-flight"){
@@ -37,7 +37,10 @@ node(){
 
     stage("Test params"){
         echo "I'm ${params.ANSIBLE_EXECUTOR_TAG}!"
+        echo "What's a part of a shipwreck? ${params.FLOTSAM}!"
+        echo "What's another part of a shipwreck? ${params.JETSAM}!"
     }
+
     // stage("Deploy Infra"){
     //     deployInfra()
     // }
