@@ -24,13 +24,13 @@ addBuildConfigurations(
   ]
 )
 
-addBuildParameters(
-    [
-        string(defaultValue: 'flotsam', description: 'One part of a shipwreck', name: 'FLOTSAM'),
-        string(defaultValue: 'jetsam', description: 'Another part of a shipwreck', name: 'JETSAM'),
-
-    ]
-)
+// addBuildParameters(
+//     [
+//         string(defaultValue: 'flotsam', description: 'One part of a shipwreck', name: 'FLOTSAM'),
+//         string(defaultValue: 'jetsam', description: 'Another part of a shipwreck', name: 'JETSAM'),
+//
+//     ]
+// )
 node(){
     stage("pre-flight"){
         deleteDir()
