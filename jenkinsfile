@@ -1,4 +1,4 @@
-addBuildConfigurations(
+buildConfig.addBuildConfigurations(
   [
           [
                   $class: 'BuildConfigProjectProperty',
@@ -24,13 +24,15 @@ addBuildConfigurations(
   ]
 )
 
-// addBuildParameters(
-//     [
-//         string(defaultValue: 'flotsam', description: 'One part of a shipwreck', name: 'FLOTSAM'),
-//         string(defaultValue: 'jetsam', description: 'Another part of a shipwreck', name: 'JETSAM'),
-//
-//     ]
-// )
+buildConfig.addBuildParameters(
+    [
+        string(defaultValue: 'flotsam', description: 'One part of a shipwreck', name: 'FLOTSAM'),
+        string(defaultValue: 'jetsam', description: 'Another part of a shipwreck', name: 'JETSAM'),
+
+    ]
+)
+
+buildConfig.setBuildConfig()
 node(){
     stage("pre-flight"){
         deleteDir()
