@@ -5,23 +5,23 @@ addBuildParameters(
 
     ]
 )
-addBuildConfigurations(
-    [
-        [
-            $class: 'BuildConfigProjectProperty',
-            name: '',
-            namespace: '',
-            resourceVersion: '',
-            uid: ''
-        ],
-        gitLabConnection('gitlab-tlv'),
-        [
-            $class: 'RebuildSettings',
-            autoRebuild: false,
-            rebuildDisabled: false
-        ],
-    ]
-)
+// addBuildConfigurations(
+//     [
+//         [
+//             $class: 'BuildConfigProjectProperty',
+//             name: '',
+//             namespace: '',
+//             resourceVersion: '',
+//             uid: ''
+//         ],
+//         gitLabConnection('gitlab-tlv'),
+//         [
+//             $class: 'RebuildSettings',
+//             autoRebuild: false,
+//             rebuildDisabled: false
+//         ],
+//     ]
+// )
 
 node(){
     stage("pre-flight"){
@@ -33,6 +33,10 @@ node(){
 
     stage("Parse Configuration"){
         parseConfigYaml()
+    }
+
+    stage("Test params"){
+        echo "I'm ${params.ANSIBLE_EXECUTOR_TAG}!"
     }
     // stage("Deploy Infra"){
     //     deployInfra()
