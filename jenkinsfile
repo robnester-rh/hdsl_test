@@ -1,65 +1,59 @@
-buildConfig.addBuildConfigurations(
-  [
-          [
-                  $class: 'BuildConfigProjectProperty',
-                  name: '',
-                  namespace: '',
-                  resourceVersion: '',
-                  uid: ''
-          ],
-          buildDiscarder(
-                  logRotator(
-                          artifactDaysToKeepStr: '',
-                          artifactNumToKeepStr: '',
-                          daysToKeepStr: '1',
-                          numToKeepStr: ''
-                  )
-          ),
-          gitLabConnection('gitlab-tlv'),
-          [
-                  $class: 'RebuildSettings',
-                  autoRebuild: false,
-                  rebuildDisabled: false
-          ]
-  ]
-)
+// Define the openshift pod name, docker repo url, namespace, and service acct
+// for the DSL pod template.
+dslPodName = "contraDsl-${UUID.randomUUID()}"
+dockerRepoURL = '172.30.1.1:5000'
+openshiftNamespace = 'contra-sample-project'
+openshiftServiceAccount = 'jenkins'
 
-buildConfig.addBuildParameters(
-    [
-        string(defaultValue: 'flotsam', description: 'One part of a shipwreck', name: 'FLOTSAM'),
-        string(defaultValue: 'jetsam', description: 'Another part of a shipwreck', name: 'JETSAM'),
+// Create the DSL podTemplate
+createDslContainers podName: dslPodName,
+                    dockerRepoURL: dockerRepoURL,
+                    openshiftNamespace: openshiftNamespace,
+                    openshiftServiceAccount: openshiftServiceAccount,
+// Pass the remainder of your jenkinsfile as a closure to the createDslContainers method
+{
+  node(dslPodName){
+      stage("pre-flight"){
+          deleteDir()
+          git branch: 'development', url: 'https://github.com/robnester-rh/hdsl_test'
+      }
 
-    ]
-)
+      stage("Where Am I"){
+        sh "pwd"
+        sh "ls -lah"
+        sh "echo $WORKSPACE"
+        sh "hostname"
+      }
 
-buildConfig.setBuildConfig()
-node(){
-    stage("pre-flight"){
-        deleteDir()
-        git branch: 'development', url: 'https://github.com/robnester-rh/hdsl_test'
-        env.buildParameters = [:]
-        env.buildConfigurations = []
-    }
+      stage("Parse Configuration"){
+        echo 'I would parse you!'
+          parseConfigYaml()
+          sh "pwd"
+          sh "ls -lah"
+          sh "echo $WORKSPACE"
+          sh "hostname"
+          echo env.configJSON
+          // contai ner('ansible-executor'){
+          //   sh "ls /"
+          // }
+      }
 
-    stage("Parse Configuration"){
-        parseConfigYaml()
-    }
+      // stage("Test params"){
+      //     echo "I'm ${params.ANSIBLE_EXECUTOR_TAG}!"
+      //     echo "What's a part of a shipwreck? ${params.FLOTSAM}!"
+      //     echo "What's another part of a shipwreck? ${params.JETSAM}!"
+      // }
 
-    stage("Test params"){
-        echo "I'm ${params.ANSIBLE_EXECUTOR_TAG}!"
-        echo "What's a part of a shipwreck? ${params.FLOTSAM}!"
-        echo "What's another part of a shipwreck? ${params.JETSAM}!"
-    }
+      // stage("Deploy Infra"){
+      //     deployInfra()
+      // }
+      // stage("Test Pinfile"){
+      //     sh "pwd"
+      //     sh "ls -lah *"
+      //     a = readFile 'linchpin/PinFile'
+      //     echo "PinFile Content:\n${a}"
+      // }
+      // archiveArtifacts '*, linchpin/*'
 
-    // stage("Deploy Infra"){
-    //     deployInfra()
-    // }
-    // stage("Test Pinfile"){
-    //     sh "pwd"
-    //     sh "ls -lah *"
-    //     a = readFile 'linchpin/PinFile'
-    //     echo "PinFile Content:\n${a}"
-    // }
-    // archiveArtifacts '*, linchpin/*'
-
+}
 }
