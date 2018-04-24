@@ -19,31 +19,31 @@ infra:
             count: 4
             instance_type: f1-2xlarge
 
-      baremetal:
-        beaker:
-          arch: x86_64
-          distro: RHEL-7.4
-          variant: Server
-          hostrequires:
-            - tag: processor
-              op: ">="
-              value: 4
-            - tag: device
-              op: "="
-              type: network
-          job_group: central-ci-ops
-
-          instances:
-          - name: foo1
-            arch: s390x
-            keyvalue:
-              network: e1000
-          - name: foo2
-            arch: aarm64
-          - name: foo3
-            variant: Workstation
-
-    configure:
+    #   baremetal:
+    #     beaker:
+    #       arch: x86_64
+    #       distro: RHEL-7.4
+    #       variant: Server
+    #       hostrequires:
+    #         - tag: processor
+    #           op: ">="
+    #           value: 4
+    #         - tag: device
+    #           op: "="
+    #           type: network
+    #       job_group: central-ci-ops
+    #
+    #       instances:
+    #       - name: foo1
+    #         arch: s390x
+    #         keyvalue:
+    #           network: e1000
+    #       - name: foo2
+    #         arch: aarm64
+    #       - name: foo3
+    #         variant: Workstation
+    #
+    # configure:
 #
 #      openstack:
 #        count: 2

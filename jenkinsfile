@@ -15,27 +15,14 @@ createDslContainers podName: dslPodName,
   node(dslPodName){
       stage("pre-flight"){
           deleteDir()
-          git branch: 'development', url: 'https://github.com/robnester-rh/hdsl_test'
-      }
-
-      stage("Where Am I"){
-        sh "pwd"
-        sh "ls -lah"
-        sh "echo $WORKSPACE"
-        sh "hostname"
+          git branch: 'addBuildParameters', url: 'https://github.com/robnester-rh/hdsl_test'
       }
 
       stage("Parse Configuration"){
-        echo 'I would parse you!'
           parseConfigYaml()
-          sh "pwd"
-          sh "ls -lah"
-          sh "echo $WORKSPACE"
-          sh "hostname"
-          echo env.configJSON
-          // contai ner('ansible-executor'){
-          //   sh "ls /"
-          // }
+          container('ansible-executor'){
+            sh "ls /"
+          }
       }
 
       // stage("Test params"){
@@ -44,9 +31,9 @@ createDslContainers podName: dslPodName,
       //     echo "What's another part of a shipwreck? ${params.JETSAM}!"
       // }
 
-      // stage("Deploy Infra"){
-      //     deployInfra()
-      // }
+      stage("Deploy Infra"){
+          deployInfra()
+      }
       // stage("Test Pinfile"){
       //     sh "pwd"
       //     sh "ls -lah *"
