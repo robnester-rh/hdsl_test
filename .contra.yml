@@ -3,8 +3,8 @@ infra:
     provision:
       cloud:
         aws:
-          ami: ami-92340
-          region: us-east-1
+          ami: ami-0b00212ef9a4711c6
+          region: us-east-1d
           security_groups:
           - default
           instance_type: m1-large
@@ -13,11 +13,9 @@ infra:
             region: us-east-2
           - name: host19
           - name: host2
-            security_groups:
-            - special_squirrel
-            ami: ami-2134890
+            ami: ami-0b00212ef9a4711c6
             count: 4
-            instance_type: f1-2xlarge
+            instance_type: m1-large
 
     #   baremetal:
     #     beaker:
