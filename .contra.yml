@@ -3,19 +3,21 @@ infra:
     provision:
       cloud:
         aws:
-          ami: ami-0b00212ef9a4711c6
-          region: us-east-1d
+          ami: ami-00b9bfa11b5bb80b2
+          region: us-east-1
           security_groups:
           - default
-          instance_type: m1-large
+          instance_type: m4.large
+          vpc_subnet_id: subnet-cf57c596
+          assign_public_ip: false
           instances:
           - name: db_server
-            region: us-east-2
+            region: us-east-1
           - name: host19
           - name: host2
-            ami: ami-0b00212ef9a4711c6
+            ami: ami-984189e2
             count: 4
-            instance_type: m1-large
+            instance_type: m4.large
 
     #   baremetal:
     #     beaker:

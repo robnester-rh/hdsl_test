@@ -25,12 +25,6 @@ createDslContainers podName: dslPodName,
           }
       }
 
-      // stage("Test params"){
-      //     echo "I'm ${params.ANSIBLE_EXECUTOR_TAG}!"
-      //     echo "What's a part of a shipwreck? ${params.FLOTSAM}!"
-      //     echo "What's another part of a shipwreck? ${params.JETSAM}!"
-      // }
-
       stage("Deploy Infra"){
           deployInfra()
       }
