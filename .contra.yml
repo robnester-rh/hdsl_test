@@ -10,6 +10,7 @@ infra:
           instance_type: m4.large
           vpc_subnet_id: subnet-cf57c596
           assign_public_ip: false
+          key_pair: "aws_ssh"
           instances:
           - name: db_server
             region: us-east-1
