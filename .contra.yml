@@ -9,7 +9,7 @@ infra:
           - default
           instance_type: m4.large
           vpc_subnet_id: subnet-cf57c596
-          assign_public_ip: false
+          assign_public_ip: true
           instances:
           - name: db_server
             region: us-east-1
