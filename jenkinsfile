@@ -34,7 +34,6 @@ createDslContainers podName: dslPodName,
       //     a = readFile 'linchpin/PinFile'
       //     echo "PinFile Content:\n${a}"
       // }
-      // archiveArtifacts '*, linchpin/*'
-
+      archiveArtifacts allowEmptyArchive: true, artifacts: '*, linchpin/*'
 }
 }
