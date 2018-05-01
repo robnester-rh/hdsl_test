@@ -27,6 +27,10 @@ createDslContainers podName: dslPodName,
 
       stage("Deploy Infra"){
           deployInfra()
+          sh "cp /etc/linchpin.conf ${WORKSPACE}/linchpin.conf"
+          sh "ls -lah ${WORKSPACE}/"
+          sh "ls -lah ${WORKSPACE}/linchpin"
+          sh "ls -lah ${WORKSPACE}/linchpin/resources"
       }
       // stage("Test Pinfile"){
       //     sh "pwd"
@@ -34,6 +38,6 @@ createDslContainers podName: dslPodName,
       //     a = readFile 'linchpin/PinFile'
       //     echo "PinFile Content:\n${a}"
       // }
-      archiveArtifacts allowEmptyArchive: true, artifacts: '*, linchpin/*, /etc/linchpin.conf'
-}
+      archiveArtifacts allowEmptyArchive: true, artifacts: '*, linchpin/*, linchpin/resources/*, /etc/linchpin.conf'
+  }
 }
