@@ -3,7 +3,7 @@ infra:
     provision:
       cloud:
         aws:
-          ami: ami-00b9bfa11b5bb80b2
+          ami: ami-70aa560a
           region: us-east-1
           security_groups:
           - default
