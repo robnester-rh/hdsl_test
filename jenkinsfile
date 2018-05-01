@@ -30,7 +30,7 @@ createDslContainers podName: dslPodName,
           sh "cp /etc/linchpin.conf ${WORKSPACE}/linchpin.conf"
           sh "ls -lah ${WORKSPACE}/"
           sh "ls -lah ${WORKSPACE}/linchpin"
-          sh "ls -lah ${WORKSPACE}/linchpin/resources"
+          sh "ls -lah ${WORKSPACE}/resources"
       }
       // stage("Test Pinfile"){
       //     sh "pwd"
