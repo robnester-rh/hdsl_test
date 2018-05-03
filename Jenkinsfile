@@ -23,11 +23,11 @@ createDslContainers podName: dslPodName,
       }
 
       stage("Deploy Infra"){
-          deployInfra(verbose=true)
+          deployInfra()
       }
-      // stage("Configure Infra"){
-      //     configureInfra()
-      // }
+      stage("Configure Infra"){
+          configureInfra()
+      }
       archiveArtifacts allowEmptyArchive: true, artifacts: '*, linchpin/*, resources/*, linchpin/resources/*'
   }
 }
