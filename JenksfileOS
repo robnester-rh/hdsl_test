@@ -32,7 +32,7 @@ createDslContainers podName: dslPodName,
 
       stage("Execute Tests"){
           executeTests()
-
+      }
       archiveArtifacts allowEmptyArchive: true, artifacts: '*, linchpin/*, resources/*, linchpin/resources/*'
   }
 }
