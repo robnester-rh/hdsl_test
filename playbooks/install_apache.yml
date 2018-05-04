@@ -1,0 +1,16 @@
+---
+- hosts: host19
+  become: yes
+  become_user: root
+
+  tasks:
+  - name: ensure apache is at the latest version
+    yum:
+      name: httpd
+      state: latest
+
+  - name: ensure apache is running (and enable it at boot)
+    service:
+      name: httpd
+      state: started
+      enabled: yes

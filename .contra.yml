@@ -1,49 +1,83 @@
 ---
 infra:
-    provision:
-      cloud:
-        aws:
-          ami: ami-92340
+  provision:
+    cloud:
+      aws:
+        ami: ami-70aa560a
+        region: us-east-1
+        security_groups:
+        - default
+        instance_type: m4.large
+        vpc_subnet_id: subnet-cf57c596
+        assign_public_ip: true
+        key_pair: libra
+        user: ec2-user
+        instances:
+        - name: db_server
+          user: ec2-user1
           region: us-east-1
-          security_groups:
-          - default
-          instance_type: m1-large
-          instances:
-          - name: db_server
-            region: us-east-2
-          - name: host19
-          - name: host2
-            security_groups:
-            - special_squirrel
-            ami: ami-2134890
-            count: 4
-            instance_type: f1-2xlarge
-
-      baremetal:
-        beaker:
-          arch: x86_64
-          distro: RHEL-7.4
-          variant: Server
-          hostrequires:
-            - tag: processor
-              op: ">="
-              value: 4
-            - tag: device
-              op: "="
-              type: network
-          job_group: central-ci-ops
-
-          instances:
-          - name: foo1
-            arch: s390x
-            keyvalue:
-              network: e1000
-          - name: foo2
-            arch: aarm64
-          - name: foo3
-            variant: Workstation
-
-    configure:
+        - name: host19
+        - name: host2
+          ami: ami-984189e2
+          count: 4
+          instance_type: m4.large
+      # baremetal:
+      #   beaker:
+      #     arch: x86_64
+      #     distro: RHEL-7.4
+      #     variant: Server
+      #     hostrequires:
+      #       - tag: processor
+      #         op: ">="
+      #         value: 4
+      #       - tag: device
+      #         op: "="
+      #         type: network
+      #     job_group: central-ci-ops
+      #     instances:
+      #     - name: foo1
+      #       arch: s390x
+      #       keyvalue:
+      #         network: e1000
+      #     - name: foo2
+      #       arch: aarm64
+      #     - name: foo3
+      #       variant: Workstation
+  configure:
+    playbooks:
+      - location: playbooks/install_apache.yml
+        vars:
+          - 'foo=bar'
+tests:
+  playbooks:
+    - location: tests/verify_apapche.yml
+      vars:
+        - 'foo=bar'
+    #   baremetal:
+    #     beaker:
+    #       arch: x86_64
+    #       distro: RHEL-7.4
+    #       variant: Server
+    #       hostrequires:
+    #         - tag: processor
+    #           op: ">="
+    #           value: 4
+    #         - tag: device
+    #           op: "="
+    #           type: network
+    #       job_group: central-ci-ops
+    #
+    #       instances:
+    #       - name: foo1
+    #         arch: s390x
+    #         keyvalue:
+    #           network: e1000
+    #       - name: foo2
+    #         arch: aarm64
+    #       - name: foo3
+    #         variant: Workstation
+    #
+    # configure:
 #
 #      openstack:
 #        count: 2
