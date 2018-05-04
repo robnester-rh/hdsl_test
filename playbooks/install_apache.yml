@@ -1,9 +1,8 @@
 ---
 - hosts: host19
-  remote_user: ec2-user
   become: yes
   become_user: root
-  
+
   tasks:
   - name: ensure apache is at the latest version
     yum:
