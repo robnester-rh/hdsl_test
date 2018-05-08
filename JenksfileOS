@@ -23,11 +23,13 @@ createDslContainers podName: dslPodName,
       }
 
       stage("Deploy Infra"){
-          deployInfra()
+          deployInfra openstack_credentials_id: "openstack.creds",
+            openstack_ssh_id: "openstack.ssh",
+            verbose: true
       }
 
       stage("Configure Infra"){
-          configureInfra()
+          configureInfra verbose: true
       }
 
       stage("Execute Tests"){
