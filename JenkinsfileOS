@@ -32,8 +32,12 @@ createDslContainers podName: dslPodName,
           configureInfra verbose: true
       }
 
-      stage("Execute Tests"){
-          executeTests()
+//      stage("Execute Tests"){
+//          executeTests()
+//      }
+
+      stage("Teardown Resources"){
+          destroyInfra verbose: true
       }
       archiveArtifacts allowEmptyArchive: true, artifacts: '*, linchpin/*, resources/*, linchpin/resources/*'
   }
