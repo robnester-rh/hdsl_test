@@ -19,7 +19,7 @@ createDslContainers podName: dslPodName,
       }
 
       stage("Parse Configuration"){
-          parseConfigYaml('.cvp.yml')
+          parseConfigYaml filename: '.cvp.yml'
       }
 
       stage("Deploy Infra"){
@@ -32,8 +32,12 @@ createDslContainers podName: dslPodName,
           configureInfra verbose: true
       }
 
-      stage("Execute Tests"){
-          executeTests()
+      // stage("Execute Tests"){
+      //     executeTests verbose: true
+      // }
+
+      stage("Destroy Infra"){
+          destroyInfra verbose: true
       }
       archiveArtifacts allowEmptyArchive: true, artifacts: '*, linchpin/*, resources/*, linchpin/resources/*'
   }

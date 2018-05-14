@@ -15,23 +15,23 @@ createDslContainers podName: dslPodName,
   node(dslPodName){
       stage("pre-flight"){
           deleteDir()
-          git branch: 'addBuildParameters', url: 'https://github.com/robnester-rh/hdsl_test'
+          git branch: 'development', url: 'https://github.com/robnester-rh/hdsl_test'
       }
 
       stage("Parse Configuration"){
-          parseConfigYaml()
+          parseConfigYaml
       }
 
       stage("Deploy Infra"){
-          deployInfra()
+          deployInfra
       }
       stage("Configure Infra"){
-          configureInfra()
+          configureInfra
       }
 
-      stage("Execute Tests"){
-          executeTests()
-      }
+      // stage("Execute Tests"){
+      //     executeTests
+      // }
       archiveArtifacts allowEmptyArchive: true, artifacts: '*, linchpin/*, resources/*, linchpin/resources/*'
   }
 }
