@@ -19,7 +19,7 @@ createDslContainers podName: dslPodName,
       }
 
       stage("Parse Configuration"){
-          parseConfigYaml()
+          parseConfig()
       }
 
       stage("Deploy Infra"){
