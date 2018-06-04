@@ -23,7 +23,9 @@ createDslContainers podName: dslPodName,
       }
 
       stage("Deploy Infra"){
-          deployInfra()
+          deployInfra(
+              verbose: true
+          )
       }
       stage("Configure Infra"){
           configureInfra()
